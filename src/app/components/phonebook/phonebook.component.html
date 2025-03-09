@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Phonebook</h1>
+    
+    <!-- Search -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Search contacts..." 
+            [(ngModel)]="searchTerm"
+            (keyup.enter)="onSearch()"
+          >
+          <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Contact Form Component -->
+    <app-contact-form 
+      [contactToEdit]="selectedContact"
+      (formSubmit)="onContactFormSubmit($event)"
+      (cancelEdit)="cancelEdit()"
+    ></app-contact-form>
+  
+    <!-- Contact List Component -->
+    <app-contact-list
+      [contacts]="contacts"
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalPages]="totalPages"
+      [totalItems]="totalItems"
+      (editContact)="onEdit($event)"
+      (deleteContact)="onDelete($event)"
+      (pageChange)="onPageChange($event)"
+    ></app-contact-list>
+  </div>

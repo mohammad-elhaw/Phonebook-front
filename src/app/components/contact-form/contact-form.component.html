@@ -1,0 +1,61 @@
+<div class="card mb-4">
+    <div class="card-header">
+      {{ editMode ? 'Edit Contact' : 'Add New Contact' }}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Name</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              formControlName="name"
+              [ngClass]="{'is-invalid': contactForm.get('name')?.invalid && contactForm.get('name')?.touched}"
+            >
+            <div class="invalid-feedback" *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+              Name is required
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="phoneNumber" 
+              formControlName="phoneNumber"
+              [ngClass]="{'is-invalid': contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched}"
+            >
+            <div class="invalid-feedback" *ngIf="contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched">
+              Phone number is required
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              formControlName="email"
+              [ngClass]="{'is-invalid': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}"
+            >
+            <div class="invalid-feedback" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+              Valid email is required
+            </div>
+          </div>
+        </div>
+        
+        <div class="d-flex">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="contactForm.invalid">
+            {{ editMode ? 'Update' : 'Add' }} Contact
+          </button>
+          <button type="button" class="btn btn-secondary" *ngIf="editMode" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
